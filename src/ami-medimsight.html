@@ -22,7 +22,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="my-icons.html">
 
-<dom-module id="my-app">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r78/three.js"/>
+<script type="text/javascript" src="https://cdn.rawgit.com/fnndsc/vjs/master/external/scripts/babel/polyfill.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/mrdoob/stats.js/master/build/stats.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js"></script>
+<script src="https://cdn.rawgit.com/FNNDSC/ami/master/dist/ami.js">
+	let AMI = require('ami.js');
+	window.console.log(AMI);
+</script>
+
+<link rel="import" href="../bower_components/ami-loader/ami-loader.html">
+<link rel="import" href="../bower_components/ami-viewer/ami-viewer.html">
+
+<dom-module id="ami-medimsight">
   <template>
     <style>
       :host {
@@ -75,9 +87,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-drawer>
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="view1" href="/view1">View One</a>
-          <a name="view2" href="/view2">View Two</a>
-          <a name="view3" href="/view3">View Three</a>
+          <a name="view1" href="/view1">DropImage</a>
+          <a name="view2" href="/view2">Upload</a>
+          <a name="view3" href="/view3">Analyze</a>
         </iron-selector>
       </app-drawer>
 
@@ -87,7 +99,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <app-header condenses reveals effects="waterfall">
           <app-toolbar>
             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
-            <div main-title>My App</div>
+            <div main-title>AMI Medimsight</div>
           </app-toolbar>
         </app-header>
 
@@ -107,7 +119,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <script>
     Polymer({
-      is: 'my-app',
+      is: 'ami-medimsight',
 
       properties: {
         page: {

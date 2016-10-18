@@ -18,20 +18,37 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
 
         padding: 10px;
-      }
+      };
     </style>
 
-    <div class="card">
+    <div class="card" ondragover="filesDropped">
       <div class="circle">1</div>
-      <h1>View One</h1>
-      <p>Ut labores minimum atomorum pro. Laudem tibique ut has.
-      <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
+      <h1>Drop Images</h1>
+      <button on-tap="handleTap">Kick Me</button>
+      <ami-loader id="amiloader"></ami-loader>
+			<ami-viewer id="amiviewer" style="height: 100%;width: 100%;"></ami-viewer>
     </div>
   </template>
 
   <script>
     Polymer({
-      is: 'my-view1'
+      is: 'my-view1',
+      handleTap: function() {
+        alert('Ow!');
+      },
+      filesDropped: function(event) {
+        droppedFiles = event.dataTransfer.files;
+        var files = droppedFiles;
+        var loader = document.getElementById('amiloader');
+        loader.urls = files;
+        
+        loader.addEventListener("loaded", function(){
+            var viewer = document.getElementById('amiviewer');
+            viewer.series = loader.series;
+            
+            loader.free();
+        }, true);
+      }
     });
   </script>
 </dom-module>

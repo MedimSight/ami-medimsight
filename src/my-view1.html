@@ -34,21 +34,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     Polymer({
       is: 'my-view1',
       _uploadBefore: function(event){
+
         // cancel AJAX Request
         event.preventDefault();
 
+        var file = event.detail.file;
+        var fileIndex = this.files.indexOf(file);
+
         // Update UI
-        if(event && event.detail && event.detail.file){
-          var file = event.detail.file;
-          file.status = "";
-          file.complete = true;
-          file.progress = 100;
-          file.uploading = false;
+        this.set(['files', fileIndex, 'progress'], 100);
+        this.set(['files', fileIndex, 'complete'], true);
           
-          // fire event
-          var event = new CustomEvent('file-received', { 'detail': file });
-          this.dispatchEvent(event);
-        }
+        // fire event
+        var event = new CustomEvent('file-received', { 'detail': file });
+        this.dispatchEvent(event);
 
       }
     });
